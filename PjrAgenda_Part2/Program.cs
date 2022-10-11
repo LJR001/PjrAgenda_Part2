@@ -303,9 +303,10 @@ namespace PjrAgenda_Part2
             }
 
         }
-       
+
         #endregion
 
+        #region HOME MENU
         static void Main(string[] args)
         {
             //InsertContato();
@@ -381,5 +382,6 @@ namespace PjrAgenda_Part2
             } while (true);
 
         }
+        #endregion
     }
 }

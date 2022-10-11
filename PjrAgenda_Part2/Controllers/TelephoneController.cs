@@ -12,6 +12,7 @@ namespace PjrAgenda_Part2.Controllers
 {
     internal class TelephoneController
     {
+        #region INSERT
         static public void InsertTelephone(Telephone tel)
         {
             using (var context = new AgendaContext())
@@ -21,6 +22,9 @@ namespace PjrAgenda_Part2.Controllers
             }
            
         }
+        #endregion
+
+        #region CONSULT
         static public void PrintListTelephone()
         {
             using (var context = new AgendaContext())
@@ -51,6 +55,9 @@ namespace PjrAgenda_Part2.Controllers
                 Console.WriteLine("\n Contato não encontrado");
             return search;
         }
+        #endregion
+
+        #region UPDATE
         static public void UpdateTelephone(Telephone tel)
         {
             using (var context = new AgendaContext())
@@ -60,6 +67,9 @@ namespace PjrAgenda_Part2.Controllers
                 context.SaveChanges();
             }
         }
+        #endregion
+
+        #region REMOVE
         static public void RemoveTelephone(Telephone tel)
         {
             using (var context = new AgendaContext())
@@ -69,7 +79,8 @@ namespace PjrAgenda_Part2.Controllers
                 context.SaveChanges();
             }
         }
+        #endregion
 
     }
-    
+
 }

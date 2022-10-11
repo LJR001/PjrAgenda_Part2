@@ -10,8 +10,10 @@ using PjrAgenda_Part2.Models;
 
 namespace PjrAgenda_Part2.Controllers
 {
+       
     internal class ContactController
     {
+        #region INSERT
         static public void InsertContact(Contact cont)
         {
             using (var context = new AgendaContext())
@@ -20,6 +22,9 @@ namespace PjrAgenda_Part2.Controllers
                 context.SaveChanges();
             }
         }
+        #endregion
+
+        #region CONSULT
         static public void PrintListContact()
         {
             using(var context = new AgendaContext())
@@ -61,6 +66,9 @@ namespace PjrAgenda_Part2.Controllers
 
             return search;
         }
+        #endregion
+
+        #region UPDATE
         static public void UpdateContact(Contact cont)
         {
             using (var context = new AgendaContext())
@@ -70,6 +78,9 @@ namespace PjrAgenda_Part2.Controllers
                 context.SaveChanges();
             }
         }
+        #endregion
+
+        #region REMOVE
         static public void RemoveContact(Contact cont)
         {
             using (var context = new AgendaContext())
@@ -79,5 +90,6 @@ namespace PjrAgenda_Part2.Controllers
                 context.SaveChanges();
             }
         }
+        #endregion
     }
 }
