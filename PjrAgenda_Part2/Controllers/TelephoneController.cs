@@ -27,13 +27,18 @@ namespace PjrAgenda_Part2.Controllers
             {
                 
                 var tel = new AgendaContext().Telephones.ToList();
-                foreach (var item in tel)
+                if (tel.Count>0)
                 {
-                    Console.WriteLine(item.ToString());
+                    foreach (var item in tel)
+                    {
+                        Console.WriteLine(item.ToString());
+                    }
                 }
-                Console.ReadKey();
+                else
+                    Console.WriteLine(" A lista de contato está vazia");
             }
         }
+        
         static public Telephone SelectTelephone(string name)
         {
             Telephone search = new AgendaContext().Telephones.FirstOrDefault(b => b.Name == name);
@@ -42,6 +47,8 @@ namespace PjrAgenda_Part2.Controllers
             {
                 Console.WriteLine(search.ToString());
             }
+            else
+                Console.WriteLine("\n Contato não encontrado");
             return search;
         }
         static public void UpdateTelephone(Telephone tel)

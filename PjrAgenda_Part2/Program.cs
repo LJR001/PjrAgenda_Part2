@@ -18,44 +18,60 @@ namespace PjrAgenda_Part2
 
             Console.Write(" Digite o nome: ");
             cont.Name = Console.ReadLine();
-            Console.Write(" Digite o apelido: ");
-            cont.Surname = Console.ReadLine();
-            Console.Write(" Digite o email: ");
-            cont.Email = Console.ReadLine();
+
+            bool check = ContactController.CheckContact(cont.Name);
+            if (check)
+            {
+                Console.WriteLine("\nPressione ENTER para continuar");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else
+            {
+
+                Console.Write(" Digite o apelido: ");
+                cont.Surname = Console.ReadLine();
+                Console.Write(" Digite o email: ");
+                cont.Email = Console.ReadLine();
 
 
-            //cont.Name = "Luciano";
-          
-            //cont.Surname = "Juliano";
-           
-            //cont.Email = "Junior@gmail.com";
+                //cont.Name = "Luciano";
+
+                //cont.Surname = "Juliano";
+
+                //cont.Email = "Junior@gmail.com";
 
 
-            ContactController.InsertContact(cont);
 
-           // Console.WriteLine(" Agora informa os numeros telefonicos");
-            Telephone tel = new Telephone();
+                // Console.WriteLine(" Agora informa os numeros telefonicos");
+                Telephone tel = new Telephone();
 
-            tel.Name = cont.Name;
+                tel.Name = cont.Name;
 
-            Console.Write(" Digite o numero de telefone: ");
-            tel.Phone = Console.ReadLine();
-            Console.Write(" Digite o numero de celular: ");
-            tel.Mobile = Console.ReadLine();
-
-
-            //tel.Phone = "32531045";
-           
-            //tel.Mobile = "16996373631";
+                Console.Write(" Digite o numero de telefone: ");
+                tel.Phone = Console.ReadLine();
+                Console.Write(" Digite o numero de celular: ");
+                tel.Mobile = Console.ReadLine();
 
 
-            TelephoneController.InsertTelephone(tel);
+                //tel.Phone = "32531045";
 
-            Console.WriteLine(cont.ToString());
-            Console.WriteLine(tel.ToString());
+                //tel.Mobile = "16996373631";
 
-            Console.ReadKey();
+                Console.WriteLine(" Aguarde um momento . . . \n Estamos salvando as informações . . . ");
+                ContactController.InsertContact(cont);
 
+                TelephoneController.InsertTelephone(tel);
+                Console.Clear();
+
+                Console.WriteLine(" Informações foram salvas com sucesso !!!\n");
+                Console.WriteLine(cont.ToString());
+                Console.WriteLine(tel.ToString());
+
+                Console.WriteLine("\nPressione ENTER para continuar");
+                Console.ReadKey();
+                Console.Clear();
+            }
         }
         #endregion
 
@@ -63,7 +79,7 @@ namespace PjrAgenda_Part2
         public static void PrintListContact()
         {
             Console.WriteLine(" Lista de contatos");
-            ContactController.PrintListContact();
+             ContactController.PrintListContact();
 
             Console.WriteLine("\nPressione ENTER para continuar");
             Console.ReadKey();
@@ -146,40 +162,41 @@ namespace PjrAgenda_Part2
             {
                 var cont = ContactController.SelectContact(nome);
                 //Console.WriteLine(cont.ToString());
-
-                Console.WriteLine("");
-                Console.WriteLine("\n   Opção 1: Atualizar Apelido ");
-                Console.WriteLine("   Opção 2: Atualizar Email ");
-
-                Console.Write("\n Informe a opção: ");
-                try
+                if (cont != null)             
                 {
-                    opc = int.Parse(Console.ReadLine());
+                    Console.WriteLine("");
+                    Console.WriteLine("\n   Opção 1: Atualizar Apelido ");
+                    Console.WriteLine("   Opção 2: Atualizar Email ");
+
+                    Console.Write("\n Informe a opção: ");
+                    try
+                    {
+                        opc = int.Parse(Console.ReadLine());
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    switch (opc)
+                    {
+
+
+                        case 1:
+                            Console.Write("Novo apelido: ");
+                            cont.Surname = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.Write("Novo email:");
+                            cont.Email = Console.ReadLine();
+                            break;
+                        default:
+                            Console.WriteLine(" Digite uma opção valida!!!\n Pressione ENTER para digitar novamente");
+                            break;
+                    }
+                    ContactController.UpdateContact(cont);
+
+                    Console.WriteLine(cont.ToString());
                 }
-                catch (Exception)
-                {
-                }
-
-                switch (opc)
-                {
-
-
-                    case 1:
-                        Console.Write("Novo apelido: ");
-                        cont.Surname = Console.ReadLine();
-                        break;
-                    case 2:
-                        Console.Write("Novo email:");
-                        cont.Email = Console.ReadLine();
-                        break;
-                        default :
-                        Console.WriteLine(" Digite uma opção valida!!!\n Pressione ENTER para digitar novamente");
-                        break;
-                }
-                ContactController.UpdateContact(cont);
-
-                Console.WriteLine(cont.ToString());
-
 
                 Console.WriteLine("\nPressione ENTER para continuar");
                 Console.ReadKey();
@@ -190,41 +207,42 @@ namespace PjrAgenda_Part2
             {
                 var tel = TelephoneController.SelectTelephone(nome);
                 //Console.WriteLine(tel.ToString());
-
-                Console.WriteLine("");
-                Console.WriteLine("\n   Opção 1: Atualizar telefone ");
-                Console.WriteLine("   Opção 2: Atualizar celular ");
-
-                Console.Write("\n Informe a opção: ");
-                try
+                if (tel != null)
                 {
-                    opc = int.Parse(Console.ReadLine());
+                    Console.WriteLine("");
+                    Console.WriteLine("\n   Opção 1: Atualizar telefone ");
+                    Console.WriteLine("   Opção 2: Atualizar celular ");
+
+                    Console.Write("\n Informe a opção: ");
+                    try
+                    {
+                        opc = int.Parse(Console.ReadLine());
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    switch (opc)
+                    {
+
+
+                        case 1:
+                            Console.Write("Novo telefone: ");
+                            tel.Phone = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.Write("Novo celular:");
+                            tel.Mobile = Console.ReadLine();
+                            break;
+                        default:
+                            Console.WriteLine(" Digite uma opção valida!!!\n Pressione ENTER para digitar novamente");
+                            break;
+                    }
+                    TelephoneController.UpdateTelephone(tel);
+
+                    Console.WriteLine(tel.ToString());
+
                 }
-                catch (Exception)
-                {
-                }
-
-                switch (opc)
-                {
-
-
-                    case 1:
-                        Console.Write("Novo telefone: ");
-                        tel.Phone=Console.ReadLine();
-                        break;
-                    case 2:
-                        Console.Write("Novo celular:");
-                        tel.Mobile = Console.ReadLine();
-                       break;
-                    default:
-                        Console.WriteLine(" Digite uma opção valida!!!\n Pressione ENTER para digitar novamente");
-                        break;
-                }
-                TelephoneController.UpdateTelephone(tel);
-
-                Console.WriteLine(tel.ToString());
-
-
                 Console.WriteLine("\nPressione ENTER para continuar");
                 Console.ReadKey();
                 Console.Clear();

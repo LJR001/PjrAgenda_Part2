@@ -19,19 +19,34 @@ namespace PjrAgenda_Part2.Controllers
                 context.Contacts.Add(cont);
                 context.SaveChanges();
             }
-           
         }
         static public void PrintListContact()
         {
             using(var context = new AgendaContext())
             {
                 var cont = new AgendaContext().Contacts.ToList();
-                foreach (var item in cont)
-                {
-                    Console.WriteLine(item.ToString());
-                }
-                Console.ReadKey();
-            }   
+
+                if (cont.Count > 0) {
+                    foreach (var item in cont)
+                    {
+                        Console.WriteLine(item.ToString());
+                    }
+                  
+                }                              
+                else
+                    Console.WriteLine(" A lista de contato está vazia");
+            }
+        }
+        static public bool CheckContact(string name)
+        {
+            Contact search = new AgendaContext().Contacts.FirstOrDefault(b => b.Name == name);
+            if(search == null)
+            {
+                return false;
+            }
+            else
+                Console.WriteLine("Ja existe um contato com esse nome !!!");
+            return true;
         }
 
         static public Contact SelectContact(string name)
@@ -41,6 +56,9 @@ namespace PjrAgenda_Part2.Controllers
             {
                 Console.WriteLine(search.ToString());
             }
+            else
+                Console.WriteLine("\n Contato não encontrado");
+
             return search;
         }
         static public void UpdateContact(Contact cont)
