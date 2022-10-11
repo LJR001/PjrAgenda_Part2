@@ -35,6 +35,7 @@ namespace PjrAgenda_Part2.Controllers
         static public Telephone SelectTelephone(string name)
         {
             Telephone search = new AgendaContext().Telephones.FirstOrDefault(b => b.Name == name);
+
             if (search != null)
             {
                 Console.WriteLine(search.ToString());
