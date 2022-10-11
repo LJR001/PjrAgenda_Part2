@@ -20,7 +20,8 @@ namespace PjrAgenda_Part2.Models
         }
         public override string ToString()
         {
-            return "Nome: "+Name+"\n" +
+            return "\n. . . . . .  . . . . . ." +
+                "\nNome: "+Name+"\n" +
                 "Telefone: "+Phone+"\n" +
                 "Celular: "+Mobile;
         }

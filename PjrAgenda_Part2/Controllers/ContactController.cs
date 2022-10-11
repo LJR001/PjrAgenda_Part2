@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +42,24 @@ namespace PjrAgenda_Part2.Controllers
                 Console.WriteLine(search.ToString());
             }
             return search;
+        }
+        static public void UpdateContact(Contact cont)
+        {
+            using (var context = new AgendaContext())
+            {
+                context.Entry(cont).State = EntityState.Modified;
+                context.Contacts.AddOrUpdate(cont);
+                context.SaveChanges();
+            }
+        }
+        static public void RemoveContact(Contact cont)
+        {
+            using (var context = new AgendaContext())
+            {
+                context.Entry(cont).State = EntityState.Deleted;
+                context.Contacts.Remove(cont);
+                context.SaveChanges();
+            }
         }
     }
 }

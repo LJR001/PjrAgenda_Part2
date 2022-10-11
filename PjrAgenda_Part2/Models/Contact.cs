@@ -19,7 +19,8 @@ namespace PjrAgenda_Part2.Models
         }
         public override string ToString()
         {
-            return "Nome:"+Name+"\n" +
+            return "\n - - - - - - - - - - " +
+                "\nNome:"+Name+"\n" +
                 "Apelido: "+Surname+"\n" +
                 "Email: "+Email;
         }

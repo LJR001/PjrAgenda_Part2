@@ -98,15 +98,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Agenda.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Agenda_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Agenda.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\202210110329553_InitialCreate.resx">
       <DependentUpon>202210110329553_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>

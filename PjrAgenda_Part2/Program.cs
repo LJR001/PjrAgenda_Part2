@@ -83,10 +83,10 @@ namespace PjrAgenda_Part2
         #region SELECT
         public static void SelectContact()
         {
-            Console.WriteLine(" Digite o nome para ver suas informações: ");
+            Console.Write(" Digite o nome para ver suas informações: ");
             string nome = Console.ReadLine();
             var contact = ContactController.SelectContact(nome);
-            Console.WriteLine(contact.ToString());
+           // Console.WriteLine(contact.ToString());
 
             Console.WriteLine("\nPressione ENTER para continuar");
             Console.ReadKey();
@@ -94,10 +94,10 @@ namespace PjrAgenda_Part2
         }
         public static void SelectTelephone()
         {
-            Console.WriteLine(" Digite o nome  para ver os numero de telefones: ");
+            Console.Write(" Digite o nome  para ver os numero de telefones: ");
             string nome = Console.ReadLine();
             var telephone = TelephoneController.SelectTelephone(nome);
-            Console.WriteLine(telephone.ToString());
+           // Console.WriteLine(telephone.ToString());
 
             Console.WriteLine("\nPressione ENTER para continuar");
             Console.ReadKey();
@@ -109,12 +109,12 @@ namespace PjrAgenda_Part2
         public static void UpdateContact()
         {
             
-            Console.WriteLine(" Digite o nome do contato que deseja fazer a atualizar: ");
+            Console.Write(" Informe o nome que será atualizado: ");
             string nome = Console.ReadLine();
 
             int opc = 0;
             Console.WriteLine(" Oque você deseja ataulizar?");
-            Console.WriteLine("\n    Opção 1: Informações pessoais ");
+            Console.WriteLine("\n   Opção 1: Informações pessoais ");
             Console.WriteLine("   Opção 2: Telefones ");
 
             Console.Write("\n Informe a opção: ");
@@ -145,11 +145,11 @@ namespace PjrAgenda_Part2
             void UpContact()
             {
                 var cont = ContactController.SelectContact(nome);
-                Console.WriteLine(cont.ToString());
+                //Console.WriteLine(cont.ToString());
 
                 Console.WriteLine("");
-                Console.WriteLine("\n    Opção 1: Atualizar telefone ");
-                Console.WriteLine("   Opção 2: Atualizar numeros telefonicos ");
+                Console.WriteLine("\n   Opção 1: Atualizar Apelido ");
+                Console.WriteLine("   Opção 2: Atualizar Email ");
 
                 Console.Write("\n Informe a opção: ");
                 try
@@ -165,23 +165,34 @@ namespace PjrAgenda_Part2
 
 
                     case 1:
-                        Console.Write(" Apelido: ");
+                        Console.Write("Novo apelido: ");
                         cont.Surname = Console.ReadLine();
                         break;
                     case 2:
-                        Console.Write(" Email:");
+                        Console.Write("Novo email:");
                         cont.Email = Console.ReadLine();
                         break;
+                        default :
+                        Console.WriteLine(" Digite uma opção valida!!!\n Pressione ENTER para digitar novamente");
+                        break;
                 }
+                ContactController.UpdateContact(cont);
 
+                Console.WriteLine(cont.ToString());
+
+
+                Console.WriteLine("\nPressione ENTER para continuar");
+                Console.ReadKey();
+                Console.Clear();
             }
+
             void UpTelephone()
             {
                 var tel = TelephoneController.SelectTelephone(nome);
-                Console.WriteLine(tel.ToString());
+                //Console.WriteLine(tel.ToString());
 
                 Console.WriteLine("");
-                Console.WriteLine("\n    Opção 1: Atualizar telefone ");
+                Console.WriteLine("\n   Opção 1: Atualizar telefone ");
                 Console.WriteLine("   Opção 2: Atualizar celular ");
 
                 Console.Write("\n Informe a opção: ");
@@ -198,19 +209,84 @@ namespace PjrAgenda_Part2
 
 
                     case 1:
-                        Console.Write(" Telefone: ");
+                        Console.Write("Novo telefone: ");
                         tel.Phone=Console.ReadLine();
                         break;
                     case 2:
-                        Console.Write(" Celular:");
+                        Console.Write("Novo celular:");
                         tel.Mobile = Console.ReadLine();
                        break;
+                    default:
+                        Console.WriteLine(" Digite uma opção valida!!!\n Pressione ENTER para digitar novamente");
+                        break;
                 }
+                TelephoneController.UpdateTelephone(tel);
+
+                Console.WriteLine(tel.ToString());
+
+
+                Console.WriteLine("\nPressione ENTER para continuar");
+                Console.ReadKey();
+                Console.Clear();
+
             }
 
         }
         #endregion
 
+        #region REMOVE
+        public static void RemoveContacts()
+        {
+            int opc = 0;
+            Console.Write(" Informe o nome que será excluído do contato que será excluido: ");
+            string nome = Console.ReadLine();
+            var contact = ContactController.SelectContact(nome);
+            var telephone = TelephoneController.SelectTelephone(nome);
+
+            Console.WriteLine("\n Deseja remover esse contato?");
+            Console.WriteLine(" 1 - SIM");
+            Console.WriteLine(" 2 - NÂO");
+
+            Console.Write("\n Informe a opção: ");
+            try
+            {
+                opc = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+            }
+
+            switch (opc)
+            {
+
+
+                case 1:
+                    TelephoneController.RemoveTelephone(telephone);
+                    ContactController.RemoveContact(contact);
+                    Console.WriteLine(" Contato excluido!!!");
+
+
+                    Console.WriteLine("\nPressione ENTER para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+                case 2:
+                    Console.WriteLine(" Contato não excluido");
+
+
+                    Console.WriteLine("\nPressione ENTER para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+                default:
+                    Console.WriteLine(" Opção invalida\n Pressione ENTER para continuar");
+                    Console.ReadKey();
+                    break;
+            }
+
+        }
+       
+        #endregion
 
         static void Main(string[] args)
         {
@@ -218,18 +294,16 @@ namespace PjrAgenda_Part2
 
             do
             {
-                int opc = 6;
+                int opc = 10;
                 Console.Clear();
                 Console.WriteLine(" Agenda de contatos");
                 Console.WriteLine("\n    Opção 1: Cadastrar contato ");
                 Console.WriteLine("    Opção 2: Listar contatos ");
                 Console.WriteLine("    Opção 3: Listar telefones ");
                 Console.WriteLine("    Opção 4: Selecionar contato ");
-                Console.WriteLine("    Opção 5: Selecionar telefone ");
-                Console.WriteLine("    Opção 6: Editar contato ");
-                Console.WriteLine("    Opção 7: Editar telefone ");
-                Console.WriteLine("    Opção 8: Remover contato ");
-                Console.WriteLine("    Opção 9: Remover telefone ");
+                Console.WriteLine("    Opção 5: Selecionar telefones de contato ");
+                Console.WriteLine("    Opção 6: Editar informações de contato ");
+                Console.WriteLine("    Opção 7: Excluir contato ");
                 Console.WriteLine("    Opção 0: Fechar programa ");
 
                 Console.Write("\n Informe a opção: ");
@@ -273,15 +347,14 @@ namespace PjrAgenda_Part2
                         break;
 
                     case 6:
-
+                        Console.Clear();
+                        UpdateContact();
                         break;
                     case 7:
-
+                        Console.Clear();
+                        RemoveContacts();
                         break;
-                    case 8:
-
-                        break;
-
+                   
                     default:
                         Console.Write("\n Opcao Inválida!\n Digite novamente: ");
                         break;
